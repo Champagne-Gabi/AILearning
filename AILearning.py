@@ -4,9 +4,9 @@ import openai
 # Load API key from Streamlit secrets and initialize client
 client = openai.OpenAI(api_key=st.secrets["openai"]["api_key"])
 
-st.set_page_config(page_title="Use prompting to get more done, faster, with less effort", page_icon="🤖")
-st.title("🤖 Your Prompt Coach")
-st.markdown("Learn how to use prompts to get more done, faster, with less effort.")
+st.set_page_config(page_title="Prompt Coach for Marketers", page_icon="🤖")
+st.title("🤖 Prompt Coach for Marketers")
+st.markdown("Learn how to prompt better to do your job better.")
 
 # Initialize chat history
 if "messages" not in st.session_state:
@@ -25,7 +25,8 @@ if "messages" not in st.session_state:
                 "The focus of the entire journey should be on helping them master the art and science of prompting. "
                 "After the first lesson, encourage them to keep practicing regularly, explaining that prompt crafting is a skill that improves with use. "
                 "Introduce the concept of saving and reusing prompts as templates, and explain how doing this can save time, ensure consistency, and help scale creative or strategic output. "
-                "Encourage them to try another exercise after completing the first one, focusing on a different task relevant to their role, so they can build a well-rounded prompting skillset."
+                "Encourage them to try another exercise after completing the first one, focusing on a different task relevant to their role, so they can build a well-rounded prompting skillset. "
+                "At any point, allow the user to test a prompt they've written directly in this chat and return a model-generated response, so they can iterate and learn in real time."
             )
         },
         {
