@@ -6,7 +6,7 @@ client = openai.OpenAI(api_key=st.secrets["openai"]["api_key"])
 
 st.set_page_config(page_title="Use prompting to get more done, faster, with less effort", page_icon="🤖")
 st.title("🤖 Your Prompt Coach")
-st.markdown("Learn how to prompt better, faster.")
+st.markdown("Learn how to use prompts to get more done, faster, with less effort.")
 
 # Initialize chat history
 if "messages" not in st.session_state:
