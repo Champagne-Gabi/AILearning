@@ -5,8 +5,8 @@ import openai
 client = openai.OpenAI(api_key=st.secrets["openai"]["api_key"])
 
 st.set_page_config(page_title="Prompt Coach for Marketers", page_icon="🤖")
-st.title("🤖 Your Prompt Coach")
-st.markdown("Learn how to prompt better to complete tasks faster, easier, and with more quality.")
+st.title("🤖 Make AI Work for You")
+st.markdown("Learn how better prompts will allow you to do better work faster and easier.")
 
 # Initialize chat history
 if "messages" not in st.session_state:
