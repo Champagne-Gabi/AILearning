@@ -32,7 +32,7 @@ if "messages" not in st.session_state:
         {
             "role": "assistant",
             "content": (
-                "Hey! We are excited to have you here to help make AI work for you! 🌟\n"
+                "Hey! We are excited to have you here to help make AI work for you! Today we are gonna talk about one of the keys to using AI effectively: Prompting 🌟\n"
                 "To start, can you tell me a bit about you? For example, what's your role?"
             )
         }
