@@ -16,10 +16,21 @@ if "messages" not in st.session_state:
             "content": (
                 "You are a friendly and expert marketing coach who teaches "
                 "prompt engineering to marketers through real-world tasks. "
-                "Keep responses practical, conversational, and actionable."
+                "Keep responses practical, conversational, and actionable. "
+                "Start the conversation with: 'Hey! We are excited to have you here to help make AI work for you! "
+                "To start, can you tell me a bit about you? For example, what's your role?' "
+                "Then, when the user responds, suggest 3-4 ways AI can help them in that role, "
+                "explain why it's important, and ask if they'd like to learn about one of those. "
+                "Once they choose, begin a practical lesson."
             )
         },
-        {"role": "assistant", "content": "Hey there! Ready to sharpen your prompting skills? 🔥"}
+        {
+            "role": "assistant",
+            "content": (
+                "Hey! We are excited to have you here to help make AI work for you! 🌟\n"
+                "To start, can you tell me a bit about you? For example, what's your role?"
+            )
+        }
     ]
 
 # Display chat history
@@ -29,7 +40,7 @@ for msg in st.session_state.messages:
             st.markdown(msg["content"])
 
 # Chat input
-user_input = st.chat_input("Ask your coach about prompting…")
+user_input = st.chat_input("Type your response here…")
 
 if user_input:
     st.session_state.messages.append({"role": "user", "content": user_input})
@@ -50,3 +61,4 @@ if user_input:
         st.markdown(reply)
 
     st.session_state.messages.append({"role": "assistant", "content": reply})
+
