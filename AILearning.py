@@ -4,7 +4,7 @@ import openai
 # Load API key from Streamlit secrets and initialize client
 client = openai.OpenAI(api_key=st.secrets["openai"]["api_key"])
 
-st.set_page_config(page_title="Prompt Coach for Marketers", page_icon="🤖")
+st.set_page_config(page_title="Get quality work done faster with prompting", page_icon="🤖")
 st.title("🤖 Make AI Work for You")
 st.markdown("Learn how better prompts will allow you to do better work faster and easier.")
 
