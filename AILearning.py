@@ -4,9 +4,9 @@ import openai
 # Load API key from Streamlit secrets and initialize client
 client = openai.OpenAI(api_key=st.secrets["openai"]["api_key"])
 
-st.set_page_config(page_title="Prompt Coach for Marketers", page_icon="🤖")
-st.title("🤖 Prompt Coach for Marketers")
-st.markdown("Learn how to prompt better to do your job better.")
+st.set_page_config(page_title="Use prompting to get more done, faster, with less effort", page_icon="🤖")
+st.title("🤖 Your Prompt Coach")
+st.markdown("Learn how to prompt better, faster.")
 
 # Initialize chat history
 if "messages" not in st.session_state:
