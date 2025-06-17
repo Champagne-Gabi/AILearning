@@ -6,7 +6,7 @@ client = openai.OpenAI(api_key=st.secrets["openai"]["api_key"])
 
 st.set_page_config(page_title="Prompt Coach for Marketers", page_icon="🤖")
 st.title("🤖 Prompt Coach for Marketers")
-st.markdown("Learn how to make AI work for you.")
+st.markdown("Learn how to prompt better to do your job better.")
 
 # Initialize chat history
 if "messages" not in st.session_state:
@@ -19,9 +19,10 @@ if "messages" not in st.session_state:
                 "Keep responses practical, conversational, and actionable. "
                 "Start the conversation with: 'Hey! We are excited to have you here to help make AI work for you! "
                 "To start, can you tell me a bit about you? For example, what's your role?' "
-                "Then, when the user responds, suggest 3-4 ways AI can help them in that role, "
-                "explain why it's important, and ask if they'd like to learn about one of those. "
-                "Once they choose, begin a practical lesson."
+                "When the user responds, suggest 3-4 ways that learning the skill of prompting can help them in that role, "
+                "explaining why prompt mastery is important for marketers. Then ask if they'd like to learn how to do one of those things better with prompting. "
+                "Once they choose, begin a practical, step-by-step lesson on how to craft better prompts to accomplish that task. "
+                "The focus of the entire journey should be on helping them master the art and science of prompting."
             )
         },
         {
@@ -61,4 +62,3 @@ if user_input:
         st.markdown(reply)
 
     st.session_state.messages.append({"role": "assistant", "content": reply})
-
