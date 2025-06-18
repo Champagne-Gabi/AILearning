@@ -8,7 +8,7 @@ st.set_page_config(page_title="Get quality work done faster with prompting", pag
 st.title("🤖 Make AI Work for You")
 st.markdown("Learn how better prompts will allow you to do better work faster and easier.")
 
-# Initialize session state
+# Initialize chat history and tracking
 if "messages" not in st.session_state:
     st.session_state.messages = [
         {
@@ -38,6 +38,45 @@ if "messages" not in st.session_state:
         }
     ]
 
-# Track how many prompt interactions the user has done
+# Track how many user prompt attempts have happened
 if "prompt_rounds" not in st.session_state:
-    st.sess
+    st.session_state.prompt_rounds = 0
+
+# Display chat history
+for msg in st.session_state.messages:
+    if msg["role"] != "system":
+        with st.chat_message(msg["role"]):
+            st.markdown(msg["content"])
+
+# Chat input
+user_input = st.chat_input("Type your response here…")
+
+if user_input:
+    st.session_state.messages.append({"role": "user", "content": user_input})
+    st.session_state.prompt_rounds += 1
+
+    with st.chat_message("user"):
+        st.markdown(user_input)
+
+    with st.chat_message("assistant"):
+        with st.spinner("Thinking..."):
+            try:
+                response = client.chat.completions.create(
+                    model="gpt-4o",
+                    messages=st.session_state.messages
+                )
+                reply = response.choices[0].message.content
+
+                # After the first prompt round, suggest continuing or refining
+                if st.session_state.prompt_rounds == 1:
+                    reply += (
+                        "\n\n👏 Nice work on your first prompt! Would you like to try another exercise "
+                        "based on a different task in your role, or refine the one you just worked on?"
+                    )
+
+            except Exception as e:
+                reply = f"⚠️ Error: {str(e)}"
+
+        st.markdown(reply)
+
+    st.session_state.messages.append({"role": "assistant", "content": reply})
