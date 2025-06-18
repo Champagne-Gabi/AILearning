@@ -8,7 +8,7 @@ st.set_page_config(page_title="Get quality work done faster with prompting", pag
 st.title("🤖 Make AI Work for You")
 st.markdown("Learn how better prompts will allow you to do better work faster and easier.")
 
-# Initialize chat history and tracking
+# Initialize session state
 if "messages" not in st.session_state:
     st.session_state.messages = [
         {
@@ -19,7 +19,7 @@ if "messages" not in st.session_state:
                 "Keep responses practical, conversational, and actionable. "
                 "Start the conversation with: 'Hey! We are excited to have you here to help make AI work for you! "
                 "To start, can you tell me a bit about you? For example, what's your role?' "
-                "When the user responds, suggest 3-4 ways that learning the skill of prompting can help them in that role, "
+                "When the user responds, suggest 3–4 ways that learning the skill of prompting can help them in that role, "
                 "explaining why prompt mastery is important for marketers. Then ask if they'd like to learn how to do one of those things better with prompting. "
                 "Once they choose, begin a practical, step-by-step lesson on how to craft better prompts to accomplish that task. "
                 "The focus of the entire journey should be on helping them master the art and science of prompting. "
@@ -38,9 +38,11 @@ if "messages" not in st.session_state:
         }
     ]
 
-# Track how many user prompt attempts have happened
 if "prompt_rounds" not in st.session_state:
     st.session_state.prompt_rounds = 0
+
+if "has_started_lesson" not in st.session_state:
+    st.session_state.has_started_lesson = False
 
 # Display chat history
 for msg in st.session_state.messages:
@@ -53,7 +55,6 @@ user_input = st.chat_input("Type your response here…")
 
 if user_input:
     st.session_state.messages.append({"role": "user", "content": user_input})
-    st.session_state.prompt_rounds += 1
 
     with st.chat_message("user"):
         st.markdown(user_input)
@@ -67,8 +68,16 @@ if user_input:
                 )
                 reply = response.choices[0].message.content
 
-                # After the first prompt round, suggest continuing or refining
-                if st.session_state.prompt_rounds == 1:
+                # Detect when a lesson has begun (basic keyword check)
+                if any(keyword in reply.lower() for keyword in ["step", "prompt", "example", "let's try", "write a prompt"]):
+                    st.session_state.has_started_lesson = True
+
+                # Count user prompt *attempts* only once a lesson has started
+                if st.session_state.has_started_lesson:
+                    st.session_state.prompt_rounds += 1
+
+                # Add follow-up after first *actual* prompt attempt
+                if st.session_state.has_started_lesson and st.session_state.prompt_rounds == 1:
                     reply += (
                         "\n\n👏 Nice work on your first prompt! Would you like to try another exercise "
                         "based on a different task in your role, or refine the one you just worked on?"
